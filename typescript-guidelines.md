@@ -148,6 +148,7 @@ module ModuleName {
                     propertyFromOutside: '='
                 },
                 controller: DirectiveName,
+                controllerAs: 'dn',
                 link: function ($scope, $el, $attrs, ctrl) {
                     /*
                         any DOM interaction with the directive element is described
