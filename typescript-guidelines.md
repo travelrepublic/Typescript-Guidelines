@@ -22,7 +22,7 @@ File's name should be `ServiceName.service.ts`
 
 ````javascript
 
-module ModuleName.Services {
+module ModuleName {
 
     // Export service class, a class should always start with capital letter
     export class ServiceName {
@@ -65,7 +65,7 @@ File's name should be `ControllerName.controller.ts`
 
 ````javascript
 
-module ModuleName.Controllers {
+module ModuleName {
 
     // most of the time there is no need to export the controller class
     class ControllerName {
@@ -116,7 +116,7 @@ scope ([full explanation](http://blog.thoughtram.io/angularjs/2015/01/02/explori
 
 ````javascript
 
-module ModuleName.Directives {
+module ModuleName {
 
     class DirectiveName {
 
@@ -139,23 +139,25 @@ module ModuleName.Directives {
         }
     }
 
-    function sidebarControlFactory () : any {
-        return {
-            scope: {},
-            bindToController: {
-                propertyFromOutside: '='
-            },
-            controller: DirectiveName,
-            link: function ($scope, $el, $attrs, ctrl) {
-                /*
-                    any DOM interaction with the directive element is described
-                    here - you have access to all the exposed functions of the
-                    controller, avoid using this function for any other reason
-                */
-                $el.on('click', ctrl.exposedOnScope);
+    angular
+        .module('moduleName')
+        .directive('directiveName', (): ng.IDirective => {
+            return {
+                scope: {},
+                bindToController: {
+                    propertyFromOutside: '='
+                },
+                controller: DirectiveName,
+                link: function ($scope, $el, $attrs, ctrl) {
+                    /*
+                        any DOM interaction with the directive element is described
+                        here - you have access to all the exposed functions of the
+                        controller, avoid using this function for any other reason
+                    */
+                    $el.on('click', ctrl.exposedOnScope);
+                }
             }
-        }
-    }
+        });
 }
 
 ````
